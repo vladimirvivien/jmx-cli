@@ -1,0 +1,9 @@
+org.clamshellcli.jmx.JmxSplashScreen
+org.clamshellcli.jmx.JmxPrompt
+org.clamshellcli.jmx.JmxController
+org.clamshellcli.jmx.PsCommand
+org.clamshellcli.jmx.ConnectCommand
+org.clamshellcli.jmx.MBeanCommand
+org.clamshellcli.jmx.DescribeCommand
+org.clamshellcli.jmx.ListCommand
+org.clamshellcli.jmx.ExecCommand

@@ -1,0 +1,89 @@
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.clamshellcli.jmx</groupId>
+    <artifactId>jmx-cli</artifactId>
+    <version>0.1.0</version>
+    <packaging>jar</packaging>
+    <name>jmx-cli</name>
+    
+    <properties>
+        <jmxcli.url>https://github.com/vladimirvivien/jmx-cli</jmxcli.url>
+        <jmxcli.scm>git://github.com/vladimirvivien/jmx-cli.git</jmxcli.scm>
+        <clamshellcli.groupId>org.clamshellcli</clamshellcli.groupId>
+        <clamshellcli.version>0.5.0</clamshellcli.version>
+        <clamshellcli.repo>http://s3.amazonaws.com/repo.clamshellcli.org/release/</clamshellcli.repo>
+    </properties>
+
+    <organization>
+        <name>JmxCli</name>
+        <url>${jmxcli.url}</url>
+    </organization>
+ 
+    <repositories>
+        <repository>
+            <id>clamshellcli.repo</id>
+            <name>Clamshell-Cli Repository</name>
+            <url>${clamshellcli.repo}</url>
+        </repository>        
+    </repositories>
+            
+    <licenses>
+        <license>
+            <name>apache_v2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    
+    <build>
+        <finalName>jmxcli-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Project-Url>${cli.url}</Project-Url>
+                        </manifestEntries>                    
+                    </archive>
+                    <outputDirectory>${project.basedir}/plugins</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${clamshellcli.groupId}</groupId>
+            <artifactId>clamshell-api</artifactId>
+            <version>${clamshellcli.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${clamshellcli.groupId}</groupId>
+            <artifactId>clamshell-impl-core</artifactId>
+            <version>${clamshellcli.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${clamshellcli.groupId}</groupId>
+            <artifactId>clamshell-test</artifactId>
+            <version>${clamshellcli.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
