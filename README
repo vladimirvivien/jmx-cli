@@ -1,0 +1,123 @@
+Jmx-Cli
+-------
+Jmx-Cli is a command-line interface console for JMX.  It is developed using the Clamshell-Cli framework (http://code.google.com/p/clamshell-cli/).
+
+Installation
+------------
+1. Download the current distribution from https://github.com/vladimirvivien/jmx-cli/downloads.
+2. Unzip at the location of your choosing (jmx-cli-home).
+3. Cd to jmx-cli-home
+4. From the command prompt, type 
+   > java -jar cli.jar
+
+If all works ok, you should see:
+
+    /#####                                /######    /##   /##
+   |__  ##                               /##__  ##  | ##  |__/
+      | ##   /######/####    /##   /##  | ##  \__/  | ##   /##
+      | ##  | ##_  ##_  ##  |  ## /##/  | ##        | ##  | ##
+ /##  | ##  | ## \ ## \ ##   \  ####/   | ##        | ##  | ##
+| ##  | ##  | ## | ## | ##    >##  ##   | ##    ##  | ##  | ##
+|  ######/  | ## | ## | ##   /##/\  ##  |  ######/  | ##  | ##
+ \______/   |__/ |__/ |__/  |__/  \__/   \______/   |__/  |__/
+
+A command-line tool for JMX
+Powered by Clamshell-Cli framework 
+http://code.google.com/p/clamshell-cli/
+
+Getting Started
+---------------
+Using Jmx-Cli is straight forward.  From the prompt type 'help' to get a list of available commands:
+
+      exit       Exits ClamShell.
+      help       Displays help information for available commands.
+        ps       Displays a list of running JVM processes (similar to jps tool)
+   connect       Connects to local or remote JVM MBean server.
+     mbean       Creates a label for identifying an MBean
+      desc       Prints description for specified mbean.
+      list       Lists JMX MBeans.
+      exec       Execute MBean operations and getter/setter attributes.
+
+Command Hints
+-------------
+You can also get command hints from the prompt by pressing on the tab key.  This will list all available combinations of input.  You can narrow down the hints by typing a few letters of the command then press tab.
+
+Connecting to JVM
+-----------------
+To connect to a running local JVM, do the followings:
+1. Use the 'ps' command to get a list of JMV processes running locally:
+	> ps
+	1444	cli.jar
+	1740	org.apache.catalina.startup.Bootstrap
+	
+2. use the 'connect' command to attach to a running process
+	> connect pid:1740
+
+The sequence above connects to a running instance of Tomcat server.
+	
+Listing MBeans
+--------------
+Once connected to a JVM, you can query available MBeans that are running in that JVM.  Use the 'list' command to retrieve lists of MBeans.
+
+> list filter:"Catalina:*"
+
+The command above will list all MBeans running in the "Catalina" domain.  You can label the list for future reference by typing:
+
+> list filter:"Catalina:*" label:true
+
+MBean list [Catalina:*]
+     [$0] Catalina:type=Server
+     [$1] Catalina:realmPath=/realm0/realm0,type=Realm
+...
+
+Describing an MBean
+-------------------
+Once you have a list, you can select a bean to describe.  The following describes bean with label 'Catalina:port=8080,type=Connector':
+
+> desc bean:"Catalina:port=8080,type=Connector"
+
+MBean: Catalina:port=8080,type=Connector (org.apache.catalina.mbeans.ConnectorMBean)
+Implementation of a Coyote connector
+
+Attributes:
+     port : int (rw) - The port number on which we listen for requests
+     useIPVHosts : boolean (rw) - Should IP-based virtual hosting be used? 
+     redirectPort : int (rw) - The redirect port for non-SSL to SSL redirects
+     minSpareThreads : int (rw) - The number of request processing threads that will be created
+     secure : boolean (rw) - Is this a secure (SSL) Connector?
+     acceptCount : int (rw) - The accept count for this Connector
+     maxThreads : int (rw) - The maximum number of request processing threads to be created
+     URIEncoding : java.lang.String (rw) - Character encoding used to decode the URI
+     modelerType : java.lang.String (r) - Type of the modeled resource. Can be set only once
+     packetSize : int (rw) - The ajp packet size.
+     processorCache : int (rw) - The processor cache size.
+...
+     xpoweredBy : boolean (rw) - Is generation of X-Powered-By response header enabled/disabled?
+     stateName : java.lang.String (r) - The name of the LifecycleState that this component is currently in
+     allowTrace : boolean (rw) - Allow disabling TRACE method
+     useBodyEncodingForURI : boolean (rw) - Should the body encoding be used for URI query parameters
+     secret : java.lang.String (w) - Authentication secret (I guess ... not in Javadocs)
+
+Operations:
+     destroy():void
+     pause():void
+     stop():void
+     resume():void
+     start():void
+     init():void
+     
+The same command can be issued using the associated label of the bean from the list (see above):
+> desc bean:$28
+
+Execute an Operation
+--------------------
+Jmx-cli lets you execute operation on your management beans as well.  The next examples shuts down the Tomcat connector for port 8080:
+
+> exec bean:"Catalina:port=8080,type=Connector" op:"stop"
+
+
+Known Issues
+------------
+1. 64-bit Windows not compatible with current jline library.
+2. Some of the commands do not work in Jdk7 (i.e. ps command.)
+
