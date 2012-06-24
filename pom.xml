@@ -4,7 +4,7 @@
 
     <groupId>org.clamshellcli.jmx</groupId>
     <artifactId>jmx-cli</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <packaging>jar</packaging>
     <name>jmx-cli</name>
     
@@ -12,7 +12,7 @@
         <jmxcli.url>https://github.com/vladimirvivien/jmx-cli</jmxcli.url>
         <jmxcli.scm>git://github.com/vladimirvivien/jmx-cli.git</jmxcli.scm>
         <clamshellcli.groupId>org.clamshellcli</clamshellcli.groupId>
-        <clamshellcli.version>0.5.0</clamshellcli.version>
+        <clamshellcli.version>0.5.1</clamshellcli.version>
         <clamshellcli.repo>http://s3.amazonaws.com/repo.clamshellcli.org/release/</clamshellcli.repo>
     </properties>
 
