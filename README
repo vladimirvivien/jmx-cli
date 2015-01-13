@@ -1,6 +1,6 @@
 Jmx-Cli
 -------
-Jmx-Cli is a command-line interface console for JMX.  It is developed using the Clamshell-Cli framework (http://code.google.com/p/clamshell-cli/).
+Jmx-Cli is a command-line interface console for JMX.  It is developed using the Clamshell-Cli framework (https://github.com/vladimirvivien/clamshell-cli).
 
 Installation
 ------------
@@ -23,7 +23,7 @@ If all works ok, you should see:
 
 A command-line tool for JMX
 Powered by Clamshell-Cli framework 
-http://code.google.com/p/clamshell-cli/
+https://github.com/vladimirvivien/clamshell-cli
 
 Getting Started
 ---------------
